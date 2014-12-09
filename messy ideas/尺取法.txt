@@ -1,0 +1,14 @@
+对于一个排好序的数组a[i]
+int l = 0,r = size - 1;
+while(l < r) {
+    if(a[l] + a[r] >= k) {
+        r --;m ++;
+    } else {
+        ans += m;
+        l ++;
+    }
+}
+int t = size - l - 1;
+ans += (1 + t) * t / 2;
+
+可以计算出数组a中大于k的对数

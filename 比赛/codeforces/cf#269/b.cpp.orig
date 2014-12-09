@@ -1,0 +1,228 @@
+/***********************************************\
+ |Author: YMC
+ |Created Time: 2014/9/26 23:49:18
+ |File Name: b.cpp
+ |Description: 
+\***********************************************/
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#define L(rt) (rt<<1)
+#define R(rt) (rt<<1|1)
+#define mset(l,n) memset(l,n,sizeof(l))
+#define rep(i,n) for(int i=0;i<n;++i)
+#define maxx(a) memset(a, 0x3f, sizeof(a))
+#define zero(a) memset(a, 0, sizeof(a))
+#define srep(i,n) for(int i = 1;i <= n;i ++)
+#define MP make_pair
+const int inf=0x3f3f3f3f ;
+const double eps=1e-8 ;
+const double pi=acos (-1.0);
+typedef long long ll;
+
+using namespace std;
+int n;
+int da[2005];
+map<int,int> ma;
+vector <int> v[2005];
+int main() {
+	//freopen("input.txt","r",stdin); 
+    scanf("%d",&n);
+    srep(i,n){
+        scanf("%d",&da[i]);
+        ma[da[i]] ++;
+        v[da[i]].push_back(i+1);
+    }
+    bool fg = false;
+    int p = 0;
+    int ans;
+    int p1,p2;
+    bool fg2 = false;
+    map<int,int>::iterator it = ma.begin();
+    for(;it != ma.end();it++) {
+        if(it->second == 3){
+            fg = true;
+            ans = it->first;
+            break;
+        } else if(it->second == 2){
+            p ++;
+            if(p == 1){
+                p1 = it->first;
+            } else {
+                p2 = it->first;
+                fg = true;
+                fg2 = true;
+                break;
+            }
+        }
+    }
+    if(!fg){
+        puts("NO");
+        return 0;
+    }
+    if(!fg2){
+        puts("YES");
+        it = ma.begin();
+        
+        for(;it!=ma.end();++it){
+            if(it->first != ans){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                int t = it->first;
+                int s = v[t].size();
+                printf("%d %d %d ",v[t][0],v[t][1],v[t][2]);
+                for(int i=3;i<s;++i) printf("%d ",v[t][i]);
+            }
+        }
+        puts("");
+        it = ma.begin();
+         for(;it!=ma.end();++it){
+            if(it->first != ans){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                int t = it->first;
+                int s = v[t].size();
+                printf("%d %d %d ",v[t][1],v[t][0],v[t][2]);
+                for(int i=3;i<s;++i) printf("%d ",v[t][i]);
+            }
+        }
+            puts("");
+            it = ma.begin();
+          for(;it!=ma.end();++it){
+            if(it->first != ans){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                int t = it->first;
+                int s = v[t].size();
+                printf("%d %d %d ",v[t][2],v[t][1],v[t][0]);
+                for(int i=3;i<s;++i) printf("%d ",v[t][i]);
+            }
+        }
+          puts("");
+    } else {
+        puts("YES");
+        it = ma.begin();
+        
+        for(;it!=ma.end();++it){
+            if(it->first != p1 || it->first!=p2){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                /*int t = it->first;
+                int s = v[t].size();
+                printf("%d %d %d ",v[t][0],v[t][1],v[t][2]);
+                for(int i=3;i<s;++i) printf("%d ",v[t][i]);*/
+                int t = it->first;
+                int s = v[t].size();
+                if(t == p1){
+                    printf("%d %d ",v[t][0],v[t][1]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }else {
+                     printf("%d %d ",v[t][0],v[t][1]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }
+                
+            }
+            puts("");
+            it = ma.begin();
+
+            for(;it!=ma.end();++it){
+            if(it->first != p1 || it->first!=p2){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                int t = it->first;
+                int s = v[t].size();
+                if(t == p1){
+                    printf("%d %d ",v[t][1],v[t][0]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }else {
+                     printf("%d %d ",v[t][0],v[t][1]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }
+                
+            }
+            puts("");
+            it = ma.begin();
+            for(;it!=ma.end();++it){
+            if(it->first != p1 || it->first!=p2){
+                int t = it->first;
+                int s = v[t].size();
+                rep(i,s){
+                    printf("%d ",v[t][i]);
+                }
+            } else {
+                /*int t = it->first;
+                int s = v[t].size();
+                printf("%d %d %d ",v[t][0],v[t][1],v[t][2]);
+                for(int i=3;i<s;++i) printf("%d ",v[t][i]);*/
+                int t = it->first;
+                int s = v[t].size();
+                if(t == p1){
+                    printf("%d %d ",v[t][1],v[t][0]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }else {
+                     printf("%d %d ",v[t][0],v[t][1]);
+                    for(int i=2;i<s;++i){
+                        printf("%d ",v[t][i]);
+                    }
+                    continue;
+                }
+                
+            }
+            puts("");
+
+
+
+
+        }
+            }
+    }
+
+	return 0;
+    }
+

@@ -1,0 +1,117 @@
+#include <iostream>
+#include <queue>
+#include <algorithm>
+using namespace std;
+#define inf 1000000000
+const int dx[4]={0,1,0,-1};
+const int dy[4]={1,0,-1,0};
+int n,m,l,res,mm;
+char map[21][21],a[12];
+int grap[21][21];
+bool f[12];
+struct _point
+{
+    int x,y;
+    int step;
+    bool operator==(const _point& a) const
+    {
+        return x==a.x&&y==a.y;
+    }
+}s,e[12],temp;
+int dis(_point s,_point des)
+{
+    bool flag[21][21];
+    int i;
+    queue<_point> q;
+    memset(flag,false,sizeof(flag));
+    flag[s.x][s.y]=true;
+    s.step=0;
+    q.push(s);
+    while(!q.empty())
+        {
+            for(i=0;i<4;i++)
+                {
+                    temp=q.front();
+                    temp.x+=dx[i];
+                    temp.y+=dy[i];
+                    if(flag[temp.x][temp.y]||map[temp.x][temp.y]=='x'||temp.x<1||temp.y<1||temp.x>n||temp.y>m) continue;
+                    temp.step++;
+                    flag[temp.x][temp.y]=true;
+                    q.push(temp);
+                    if(temp==des)
+                        return temp.step;
+                }
+            q.pop();
+        }
+    return -1;  
+}
+void dfs(int t, int n, int pathlen)
+{
+        if( n >= l ){
+                if( pathlen < res )
+                        res = pathlen;
+                return;
+        }
+        int i;        
+        for(i=1;i<=l; i++){
+                if( pathlen + grap[t][i] >= res ) continue; 
+                if(!f[i]&&grap[t][i]!=inf){
+                        f[i] = true;
+                        dfs(i, n+1, pathlen + grap[t][i]);
+                        f[i] = false;
+                }
+        }
+}
+int main()
+{
+    int i,j,k,t;
+    bool flag;
+    while(scanf("%d%d",&m,&n)!=EOF,m||n)
+        {
+            getchar();
+            l=k=0;
+            flag=false;
+            for(i=0;i<=11;i++)
+                for(j=0;j<=11;j++)
+                    grap[i][j]=inf;
+            for(i=0;i<=n+1;i++)
+                map[i][0]=map[i][m+1]='.';
+            for(i=0;i<=m+1;i++)
+                map[0][i]=map[n+1][i]='.';
+            for(i=1;i<=n;i++)
+            {
+                for(j=1;j<=m;j++)
+                {
+                    scanf("%c",&map[i][j]);
+                    if(map[i][j]=='o')
+                        s.x=i,s.y=j;
+                    if(map[i][j]=='*')
+                        e[l].x=i,e[l++].y=j;
+                }
+                getchar();
+            }
+            for(i=l;i>=1;i--)
+                e[i]=e[i-1];
+            e[0]=s;
+            l++;
+            for(i=0;i<l&&!flag;i++)
+                for(j=0;j<l;j++)
+                    {
+                        if(i==j) continue;
+                        t=dis(e[i],e[j]);
+                        grap[i][j]=t;
+                        grap[j][i]=t;
+                        if(t==-1) {flag=true;break;}
+                    }
+                if(flag)
+                    {
+                        cout<<-1<<endl;
+                        continue;
+                    }
+                res=(1<<20);
+                memset(f, 0, sizeof(f));
+                f[0]=true;
+                dfs(0,1,0);
+                printf("%d/n",res);
+        }
+}
