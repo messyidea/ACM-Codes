@@ -1,7 +1,7 @@
 /***********************************************\
  |Author: YMC
- |Created Time: 2014/12/14 12:24:09
- |File Name: c.cpp
+ |Created Time: 2014/12/14 12:00:36
+ |File Name: a.cpp
  |Description: 
 \***********************************************/
 #include <iostream>
@@ -32,49 +32,41 @@ const double pi=acos (-1.0);
 typedef long long ll;
 
 using namespace std;
-int a,b,c;
-int aa[1005];
-int bb[1005];
-int cc[1005];
-map<int,int> ma;
-map<int,int> mb;
-map<int,int> mc;
-set<int> sa;
-set<int> sb;
+char ss[1000005];
+void solve() {
+    int len = strlen(ss);
+    int t = 0;
+    for(int i=0;i<len;++i) {
+        t = t * 10;
+        t += ss[i] - '0';
+        t %= 4;
+    }
+    //cout<<t<<endl;
+    int an1=1,an2=1,an3=1,an4=1;
+    int tt = t;
+    while(tt --) {
+        an1 *= 1;
+    }
+    tt = t;
+    while(tt --){
+        an2 *= 2;
+    }
+    tt = t;
+    while(tt --){
+        an3 *= 3;
+    }
+    tt = t;
+    while(tt --){
+        an4 *= 4;
+    }
+    int ans = an1 + an2 + an3 + an4;
+    ans %= 5;
+    printf("%d\n",ans);
+}
 int main() {
-
-	freopen("input.txt","r",stdin); 
-    while(scanf("%d %d %d",&a,&b,&c)!=EOF) {
-        ma.clear();
-        mb.clear();
-        mc.clear();
-        sa.clear();
-        sb.clear();
-        rep(i,a) {
-            scanf("%d",&aa[i]);
-            ma[aa[i]] ++;
-            sa.insert(aa[i]);
-        }
-        rep(i,b) {
-            scanf("%d",&bb[i]);
-            mb[bb[i]] ++;
-            sb.insert(bb[i]);
-        }
-        rep(i,c) {
-            scanf("%d",&cc[i]);
-            mc[cc[i]] ++;
-        }
-        int ans = 0;
-        set<int>::iterator it1 = sa.begin();
-        set<int>::iterator it2 = sb.begin();
-        for(;it1 != sa.end();it1 ++) {
-            it2 = sb.begin();
-            for(;it2 != sb.end();it2 ++) {
-                int tt = *it1 + *it2;
-                ans += mc[tt] * ma[*it1] * mb[*it2];
-            }
-        }
-        printf("%d\n",ans);
+	//freopen("input.txt","r",stdin); 
+    while(scanf("%s",ss)!=EOF) {
+        solve();
     }
 	return 0;
 }

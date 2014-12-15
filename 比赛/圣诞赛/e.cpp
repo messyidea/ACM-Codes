@@ -1,7 +1,7 @@
 /***********************************************\
  |Author: YMC
- |Created Time: 2014/12/14 12:49:59
- |File Name: e.cpp
+ |Created Time: 2014/12/14 12:15:54
+ |File Name: b.cpp
  |Description: 
 \***********************************************/
 #include <iostream>
@@ -32,99 +32,21 @@ const double pi=acos (-1.0);
 typedef long long ll;
 
 using namespace std;
-int me[105];
-int n,m;
-char c;
-char cc[105];
-int tot;
+int n,a,b;
 int main() {
 	//freopen("input.txt","r",stdin); 
-    while(scanf("%d %d",&n,&m) != EOF) {
-        tot = 1;
-        memset(me,0,sizeof(me));
-        me[m+1] = inf;
-        rep(ii,n) {
-            scanf("%s",&cc);
-            c = cc[0];
-            //cout<<c<<endl;
-            int cou = 0;
-            int tt;
-            int pre = -1;
-            if(c == 'A') {
-                scanf("%d",&tt);
-                bool fg = false;
-                for(int i=1;i<=m+1;++i) {
-                    if(me[i] != 0) {
-                        if(cou >= tt) {
-                            printf("%d\n",tot);
-                            for(int j = pre;j < pre + tt;++j) {
-                                me[j] = tot;
-                            }
-                            tot ++;
-                            fg = true;
-                            break;
-                        } else {
-                            cou = 0;
-                            pre = -1;
-                        }
-                    }
-                    if(me[i] == 0) {
-                        if(pre == -1) pre = i;
-                        cou ++;
-                        continue;
-                    }
-                }
-                if(!fg) {
-                    puts("NULL");
-                } 
-            }else if(c == 'D') {
-                bool fg = false;
-                int pre = -1;
-                int p = -1;
-                int cou = 0;
-                for(int i=1;i<=m;++i) {
-                    if(me[i] == 0) {
-                        fg = true;
-                        if(pre == -1) pre = i;
-                    } else if(fg){
-                        p = me[i];
-                        
-                        for(int j=i;j<=m;++j) {
-                            if(me[j] == p) cou++;
-                            else break;
-                        }
-                        for(int j=i;j<=m;++j) {
-                            if(me[j] == p) me[j] = 0;
-                            else break;
-                        }
-                        for(int j=pre;j<pre + cou;++j) {
-                            me[j] = p;
-                        }
-                        i = pre + cou - 1;
-                        pre = -1;
-                        fg = false;
-                        cou = 0;
-                    }
-                }
-            } else if(c == 'E'){
-                bool fg = false;
-                scanf("%d",&tt);
-                if(tt == 0) {
-                    puts("ILLEGAL OPERATION");
-                    continue;
-                }
-                for(int i=1;i<=m;++i) {
-                    if(me[i] == tt) {
-                        me[i] = 0;
-                        fg = true;
-                    }
-                }
-                if(!fg) {
-                    puts("ILLEGAL OPERATION");
-                }
-            }
-            //srep(i,m) cout<<me[i]<<" ";cout<<endl;
+    int T;
+    scanf("%d",&T);
+    while(T--) {
+        scanf("%d %d %d",&n,&a,&b);
+        int ans = inf;
+        int tp;
+        for(int i=0;i<=n;++i) {
+            tp = max(1000000000 - a * i,1000000000 - b *(n-i));
+            if(tp < ans) ans = tp;
         }
+        printf("%d\n",ans);
+        
     }
 	return 0;
 }
