@@ -1,0 +1,5 @@
+set sw=4 ts=4 nu nobk ai cin
+syn on
+map <F5> :w<CR> :!g++ % -O2 -g -o %< <CR>
+map <F6> :!./%<  <in.txt  >out.txt <CR>
+map <F7> :!gnome-terminal -x gdb %< <CR>
