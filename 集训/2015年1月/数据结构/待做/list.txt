@@ -1,0 +1,9 @@
+HDU 4630	No Pain No Game
+HDU 4777	Rabbit Kingdom
+HDU 4866	Shooting
+HDU 4897	Little Devil I
+SPOJ FTOUR2	Free tour II
+HDU 4670	Cube number on a tree
+
+POJ 3667
+POJ 1741	Tree
