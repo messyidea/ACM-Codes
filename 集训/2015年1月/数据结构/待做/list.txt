@@ -1,4 +1,3 @@
-HDU 4630	No Pain No Game
 HDU 4777	Rabbit Kingdom
 HDU 4866	Shooting
 HDU 4897	Little Devil I
