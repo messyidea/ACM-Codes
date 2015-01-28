@@ -32,14 +32,12 @@ const double pi=acos (-1.0);
 typedef long long ll;
 
 using namespace std;
-#define maxn 3000
-#define maxe 90005
+#define maxn 6006
+#define maxe 100005
 #define inf 0x3f3f3f3f
-struct Edge {int v,c,x; }E[maxe];
+struct Edge {int v,x;ll c;}E[maxe];
 int l[maxn],e;
 void init() {e = 0;memset(l,-1,sizeof(l));}
-int dx[] = {1,0,-1,0};
-int dy[] = {0,1,0,-1};
 inline void insert(int u,int v,int f,int invf){
     E[e].v = v;E[e].c = f;E[e].x = l[u];l[u] = e++;
     E[e].v = u;E[e].c = invf;E[e].x = l[v];l[v] = e++;
@@ -61,9 +59,9 @@ struct Netflow {
         }
         return L[sink] != -1;
     }
-    int _find(int u,int in){
+    ll _find(int u,int in){
         if(u == sink) return in;
-        int t,w = 0;    //w表示已经从u流出的总流量
+        ll t,w = 0;    //w表示已经从u流出的总流量
         for(int p = l[u];p >= 0 && w < in;p = E[p].x) {
             if(E[p].c > 0 && L[E[p].v] == L[u] + 1) {
                 if(t = _find(E[p].v,min(E[p].c,in-w))) {
@@ -76,8 +74,8 @@ struct Netflow {
         if(w < in) L[u] = -1;
         return w;
     }
-    int dinic() {
-        int t,res = 0;
+    ll dinic() {
+        ll t,res = 0;
         while(_bfs()){
             while(t = _find(src,inf)) res += t;
         }
@@ -91,7 +89,6 @@ void dfs(int u) {
     vis[u] = true;
     for(int p = l[u];p >= 0;p = E[p].x) {
         if(!vis[E[p].v] && E[p].c > 0) {
-            vis[E[p].v] = true;
             dfs(E[p].v);
         }
     }
@@ -104,7 +101,7 @@ int main() {
         init();
         flow.src = src; flow.sink = sink;
         int t,a,b;
-        int sum = 0;
+        long long sum = 0;
         srep(i,n) {
             scanf("%d",&t);
             if(t > 0) {
@@ -118,14 +115,15 @@ int main() {
             scanf("%d %d",&a,&b);
             insert(a,b,inf,0);
         }
+        ll ans = flow.dinic();
         int count = 0;
         memset(vis,false,sizeof(vis));
         dfs(src);
         for(int i=1;i<=n;++i) {
-            if(!vis[i]) count ++;
+            if(vis[i]) count ++;
         }
         printf("%d",count);
-        printf(" %d\n",sum - flow.dinic());
+        printf(" %lld\n",sum - ans);
     }
 	return 0;
 }

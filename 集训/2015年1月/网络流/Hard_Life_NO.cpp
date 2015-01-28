@@ -35,7 +35,7 @@ using namespace std;
 #define maxn 300
 #define maxe 90005
 #define inf 0x3f3f3f3f
-struct Edge {int v,c,x; }E[maxe];
+struct Edge {int v,x; double c; }E[maxe];
 int l[maxn],e;
 void init() {e = 0;memset(l,-1,sizeof(l));}
 inline void insert(int u,int v,double f,double invf){
