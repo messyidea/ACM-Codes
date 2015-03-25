@@ -1,4 +1,3 @@
-
 /***********************************************\
  |Author: YMC
  |Created Time: 2014/9/22 21:23:55
@@ -135,7 +134,6 @@ void change2(int u,int v,ll z) {
 char ch[20];
 ll ans[maxn];
 ll ans1[maxn];
-//int lll[maxn],rrr[maxn];
 pair<int,int> pa[maxn];
 int main() {
     //freopen("input.txt","r",stdin); 
