@@ -1,0 +1,17 @@
+set sw=4 ts=4 nu nobk ai cin
+syn on
+set backspace=indent,eol,start
+
+map <F10> :call CR()<CR> 
+func CR() 
+exec "w"
+exec "!start cmd /c g++ \"%\" -o \"%<.exe\" -DLOCAL & pause & \"%<.exe\" & pause"
+endfunc
+
+:imap   <C-S>   <ESC>:w<CR>
+:map    <C-S>   :w<CR>
+
+colorscheme desert
+set guifont=Consolas:h14
+
+source $VIMRUNTIME/mswin.vim
