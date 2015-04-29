@@ -99,7 +99,6 @@ int main() {
                 printf("%lld\n",ans);
             } else if(que == 2) {
                 scanf("%d %d %d",&aa,&bb,&cc);
-                //cout<<aa<<"  "<<bb<<"  "<<cc<<endl;
                 
                 if(ma[aa].size() > ma[bb].size()) swap(aa,bb);
                 bool fg = false;
