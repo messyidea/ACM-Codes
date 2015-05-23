@@ -1,7 +1,7 @@
 /***********************************************\
  |Author: YMC
- |Created Time: 2015/4/18 9:45:31
- |File Name: A.cpp
+ |Created Time: 2015/5/23 14:36:59
+ |File Name: a.cpp
  |Description: 
 \***********************************************/
 #include <iostream>
@@ -30,35 +30,28 @@ const int inf=0x3f3f3f3f ;
 const double eps=1e-8 ;
 const double pi=acos (-1.0);
 typedef long long ll;
-
+#define mod 1000000007
 using namespace std;
 int n;
-int da[1005];
-int ans1,ans2;
-int mtp = 0,tp;
+int cas = 1;
+ll da[1000005];
+void init() {
+    da[1] = 1;
+    da[2] = 2;
+    for(int i=3;i<=1000000;++i) {
+        da[i] = da[i-1] + da[i-2] * (i-1);
+        da[i] %= mod;
+    }
+}
 int main() {
-	freopen("A-large.in","r",stdin); 
-	freopen("out.txt","w",stdout); 
+	//freopen("input.txt","r",stdin); 
+    init();
     int T;
     scanf("%d",&T);
-    int cas = 1;
     while(T--) {
-        ans1 = 0; ans2 = 0;
         scanf("%d",&n);
-        rep(i,n) scanf("%d",&da[i]);
-        mtp = 0;
-        for(int i=1;i<n;++i) {
-            tp = da[i-1] - da[i];
-            if(tp > 0) {
-                mtp = max(mtp,tp);
-                ans1 += tp;
-            }
-        }
-        for(int i=0;i<n-1;++i) {
-            if(da[i] > mtp) ans2 += mtp;
-            else ans2 += da[i];
-        }
-        printf("Case #%d: %d %d\n",cas++,ans1,ans2);
+        printf("Case #%d:\n",cas ++);
+        printf("%I64d\n",da[n]);
     }
 	return 0;
 }
